@@ -72,7 +72,7 @@
     } 
     }
     elseif($_GET['tab'] == "on_due"){
-        $result = mysqli_query($conn,"SELECT DISTINCT  * FROM `transactions` WHERE `Reciver_pin-no`='".$_SESSION["username"]."' AND `Status` = 'ON_DUE'");
+        $result = mysqli_query($conn,"SELECT DISTINCT  * FROM `transactions` WHERE `Reciver_pin-no`='".$_SESSION["username"]."'");
         echo "<table class='table' id='mytable' class='display'>
         <thead><tr>
             <th scope='col' onclick=''>Transaction_id</th>

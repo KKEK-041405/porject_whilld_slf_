@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/jquery.dataTables.css">
     <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="admin.css">
     <script src="/static/bootstrap.bundle.min.js"></script>
     <title>admin</title>
 </head>
@@ -22,13 +23,20 @@
     <?php
     include ('alerts.php');
     ?>
-    <input type="button" value="logout" id="logout" onclick="logout()">
+    <div class="row align-items-end">
+      <div class="col">      
+    <input type="button" id="logout" style="align-left" value="logout" id="logout" onclick="logout()">
+      </div>
+      <div class="col">
+        <?php echo $_SESSION["username"]; ?>
+  </div>
+  </div>
     <br>
     <button id="BOOKS" onclick="window.location = '/admin.php?tab=books'">All Books</button>
     <button id="DUE" onclick="window.location = '/admin.php?tab=requests'">Requests</button>
     <button id="Transactions" onclick="window.location = '/admin.php?tab=Transactions'">Transactions</button>
     <button id="Add_Books" onclick="window.location = '/admin.php?tab=add_Book'">Add_Book</button>
-    
+    <button id="Add_students" onclick="window.location = '/admin.php?tab=ADD_students'">Add_Student</button>
     <?php
       
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -39,7 +47,6 @@
             else
                 header("Location: admin.php?tab=books");
         }
-
     ?>
     <?php
     if($_GET['tab'] == "books"){
@@ -120,17 +127,17 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputCity">Accession number</label>
-            <input type="text" name="BookID" class="form-control" id="inputCity">
+            <input type="text" name="BookID" class="form-control" id="inputCity" required>
           </div>
           <div class="form-group col-md-6">
             <label for="inputCity">BOOK Title</label>
-            <input type="text" name="Title" class="form-control" id="inputCity">
+            <input type="text" name="Title" class="form-control" id="inputCity" required>
           </div>
           </div>
           <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputCity">Branch</label>
-            <select  name="Branch" class="form-control">
+            <select  name="Branch" class="form-control" required>
 
               <option value="" selected>choose...</option>
               <option value="DCME">DCME</option>
@@ -161,7 +168,32 @@
           </div>
           <div class="form-row">
           <div class="col-md-12 text-center">
-        <button type="submit" class="btn btn-primary" class="form-control"><i class="fa fa-plus"></i> Add Card</button>
+        <button type="submit" class="btn btn-primary" class="form-control"><i class="fa fa-plus"></i> Add Book</button>
+          </div>
+        </div>
+        </form>';
+    }
+    elseif($_GET['tab'] == "ADD_students"){ 
+        echo '<form method="POST" class="p-3" action="/addstudent.php" enctype="multipart/form-data">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">Pin number</label>
+            <input type="text" name="pin" class="form-control" id="inputCity">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputCity">password</label>
+            <input type="text" name="password" class="form-control" id="inputCity">
+          </div>
+          </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">confrim password</label>
+            <input type="text" name="confrimpass" class="form-control">
+          </div>
+          <br>
+          <div class="form-row">
+          <div class="col-md-12 text-left">
+        <button type="submit" class="btn btn-primary" class="form-control"><i class="fa fa-plus"></i> Add Student</button>
           </div>
         </div>
         </form>';
