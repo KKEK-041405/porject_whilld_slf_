@@ -10,7 +10,7 @@
         $password   =   $_POST['password'];
         $confrimpass      =   $_POST['confrimpass'];
         
-        $result = mysqli_query($conn,"UPDATE `login_details` SET `Username`='',`Password`='$password'");
+        $result = mysqli_query($conn,"");
         $row = mysqli_fetch_assoc($result);
         if($row){
             $_SESSION["BOOK_exist"] = true;

@@ -2,7 +2,6 @@
 include('sql_query\config.php');
     if(isset($_SESSION["is_LoggedIn"])){
         if($_SESSION["is_LoggedIn"]){
-            echo $_SESSION["is_admin"];
             ($_SESSION["is_admin"])?header("Location: admin.php"):header("Location: student.php");
         }
     }
@@ -22,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           $_SESSION["is_LoggedIn"]  = true;
           //is admin
           if($rows['is_admin'] == 1){
-              header("Location: admin.php");
+              //sssheader("Location: admin.php");
               $_SESSION["username"] = $username;
               $_SESSION["is_admin"] = true;
               // $columns = array_keys($row);
@@ -73,7 +72,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <h2 class="u-text u-text-2">Libary&nbsp;</h2>
         <p class="u-text u-text-3">Login</p>
         <div class="u-border-1 u-border-grey-75 u-expanded-width-xs u-form u-login-control u-radius-19 u-white u-form-1">
-          <form class="u-clearfix u-form-custom-backend u-form-spacing-8 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 31px;" method="post">
+          <form action="index.php" class="u-clearfix u-form-custom-backend u-form-spacing-8 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 31px;" method="post">
             <div class="u-form-group u-form-name u-label-top">
               <label for="username-a30d" class="u-label u-label-1">Username *</label>
               <input type="text" placeholder="Enter your Username" id="username-a30d" name="username" class="u-grey-5 u-input u-input-rectangle u-input-1" required="">

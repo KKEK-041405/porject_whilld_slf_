@@ -9,10 +9,7 @@
             if($row['is_available'] == 1){
                     mysqli_query($conn,"UPDATE `books` SET `is_available` = 0 WHERE `Accession_no` = '$id' ");
                     mysqli_query($conn,"UPDATE `transactions` SET `Status` = 'Collect Book by this evening',`Transaction_Position` = 'inprogres' WHERE `Accession_no` = '$id' AND `Reciver_pin-no` = '$pin'");
-                
                     // header("Location: index.php");
-                
-               
             }
             else{
                 $_SESSION['Bookcurrently_unavailable'] = true;

@@ -25,18 +25,21 @@
     ?>
     <div class="row align-items-end">
       <div class="col">      
-    <input type="button" id="logout" style="align-left" value="logout" id="logout" onclick="logout()">
+    <input type="button" id="logout" class="btn" style="align-left" value="logout" id="logout" onclick="logout()">
       </div>
-      <div class="col">
-        <?php echo $_SESSION["username"]; ?>
-  </div>
+      
   </div>
     <br>
+    <div class="navbar bg-body d-flex flex-row">
+      <div class="navbar-brand">
+        <?php echo $_SESSION["username"]; ?>
+  </div>
     <button id="BOOKS" onclick="window.location = '/admin.php?tab=books'">All Books</button>
     <button id="DUE" onclick="window.location = '/admin.php?tab=requests'">Requests</button>
     <button id="Transactions" onclick="window.location = '/admin.php?tab=Transactions'">Transactions</button>
     <button id="Add_Books" onclick="window.location = '/admin.php?tab=add_Book'">Add_Book</button>
     <button id="Add_students" onclick="window.location = '/admin.php?tab=ADD_students'">Add_Student</button>
+  </div>
     <?php
       
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
