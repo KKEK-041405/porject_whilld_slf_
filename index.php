@@ -22,22 +22,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           $_SESSION["is_LoggedIn"]  = true;
           //is admin
           if($rows['is_admin'] == 1){
-              print("helsjflksdflksdjflsfls");
               header("Location: admin.php");
               $_SESSION["username"] = $username;
               $_SESSION["is_admin"] = true;
               // $columns = array_keys($row);
-              // header("Location: admin.php");
-          }
-          else{
-              print("helsjflksdflksdjflsfls");
+              $newUrls = "/admin.php";
+            }
+            else{
               $_SESSION["username"] = $username;
               $_SESSION["is_admin"] = false;
-              header("Location: student.php");
+              $newUrls = "/student.php";
+            }
+          if ($rows["is_FirstLogin"]) {
+              $newUrls = "/UpdatePassword.php";
           }
+          header("Location: ".$newUrls);
       }
-
-
   }
 }
 
@@ -50,14 +50,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta name="keywords" content="MBTS libary,Libary, MBTS Govt. Polytechnic">
     <meta name="description" content="welcome to MBTS libary.">
     <title>MBTS libary</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="home.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <link rel="stylesheet" href="/static/nicepage.css" media="screen">
+<link rel="stylesheet" href="/static/home.css" media="screen">
+    <script class="u-script" type="text/javascript" src="/static/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="/static/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 5.10.3, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">    
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",

@@ -23,12 +23,12 @@
     </script>
 </head>
 <body>
+    <h6 onclick="window.location = '/details.php'"><?php echo $_SESSION["username"]; ?></h6>
     <input type="button" value="logout" id="logout" onclick="logout()">
     <br>
     <button id="BOOKS" onclick="window.location = '/student.php?tab=books'">All Books</button>
     <button id="DUE" onclick="window.location = '/student.php?tab=on_due'">On Due</button>
     <button id="Transactions" onclick="window.location = '/student.php?tab=Transactions'">Transactions</button>
-    
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             if (isset($_GET['tab'])) {
@@ -178,5 +178,4 @@
       })
     })
     </script>
-    
 </html>
