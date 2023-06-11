@@ -1,0 +1,199 @@
+﻿function Onchange() {
+    var code = $("#ddlCollege").val();
+    GetBranches(code)
+}
+//InsTitues
+function GetColleges() {
+
+
+    $.ajax({
+        type: "POST",
+        url: "CollegeWiseAllotmentReport.aspx/GetColleges",
+        data: "{}",
+        async: true,
+        contentType: "application/json",
+        success: function (res) {
+
+
+            if ((res.d) == "") {
+                alert("No Data Found ");
+                return false;
+            }
+            else {
+                var obj = JSON.parse(res.d);
+                $.each(obj, function (index, value) {
+                    if (value.INST_CODE != null) {
+                        // $("#ddldistrict").append("<option value=" + value.District_ID + ">" + value.DISTRICT_CODE + "</option>");
+                        $("#ddlCollege").append("<option value=" + value.INST_CODE + ">" + value.INST_NAME + "</option>");
+                    }
+                });
+            }
+
+        },
+        error: function (err) {
+            //ErrorLog(err);
+            alert("Something went wrong! Please Try Again Later");
+        }
+    });
+}
+//Branches
+function GetBranches(InstituteCode) {
+   
+    
+      
+   
+    $("#ddlBranch").empty();
+    
+        $("#ddlBranch").append("<option value=" + "0" + ">" + "Select Branch" + "</option>");
+      
+    $.ajax({
+        type: "POST",
+        url: "CollegeWiseAllotmentReport.aspx/GetBranches",
+        data: "{'InstitudeCode':'" + InstituteCode + "'}",
+        async: true,
+        contentType: "application/json",
+        success: function (res) {
+
+
+         
+                var obj = JSON.parse(res.d);
+                $.each(obj, function (index, value) {
+                    if (value.branch_code != null) {
+                        // $("#ddldistrict").append("<option value=" + value.District_ID + ">" + value.DISTRICT_CODE + "</option>");
+                        $("#ddlBranch").append("<option value=" + value.branch_code + ">" + value.branch_name + "</option>");
+                    }
+                });
+            
+
+        },
+        error: function (err) {
+            //ErrorLog(err);
+            alert("Something went wrong! Please Try Again Later");
+        }
+    });
+}
+function BindProvisionalData() {
+
+    debugger;
+    var college = $("#ddlCollege").val();
+    
+    var Branch = $("#ddlBranch").val();
+   
+   
+
+    $.ajax({
+        type: "POST",
+        //dataType: "json",
+        url: "CollegeWiseAllotmentReport.aspx/GetAllotment",
+        async: true,
+        data: "{'College':'" + college + "','Branch':'" + Branch + "'}",
+        contentType: "application/json",
+        beforeSend: function () {
+            // Show image container
+            $("#loader").show();
+        },
+        success: function (res) {
+             //var obj = JSON.parse(res.d);
+            if (res.d == "" || res.d == []) {
+                res.d = '[]';
+              
+                
+                
+            }
+           
+             
+                var slNo = 1;
+                var slNum = 1;
+                var RowNum = 0;
+                var table = $('#tblCollege').DataTable({
+                    data: JSON.parse(res.d),
+                    // data: SelectedList,
+                    "scrollX": true,
+                    "scrollY": true,
+                    "paging": true,
+                    "destroy": true,
+                    "searching": true,
+                    "scrollY": '400px',
+                    dom: 'Blfrtip',
+                    "language":{
+                        "emptyTable":"No Data Found"
+                    },
+
+                    //  [ECETHALLTICKETNO] [ECET_RANK]   [CANDIDATENAME]    [GENDER]   [CATEGORYENTERED]     [LOCALAREA]  [SEAT_CAT] ROUND
+
+                    //ECETHALLTICKETNO,I.CANDIDATENAME,I.ECET_RANK,I.GENDER,I.CATEGORYENTERED 
+
+
+
+
+
+                    columns: [
+                        {
+                            'data': 'S.No.', 'className': 'textalign_center',
+                            "render": function (data, type, row, meta, full) {
+                                return slNo++;
+                            }
+                        },
+                            {
+                                'data': 'ECETHALLTICKETNO', 'className': 'textalign_center',
+
+                            },
+
+                           {
+                               'data': 'ECET_RANK', 'className': 'textalign_center',
+                           },
+                            {
+                                'data': 'CANDIDATENAME', 'className': 'textalign_center',
+                            },
+                           {
+                               'data': 'GENDER', 'className': 'textalign_left',
+                           },
+                           {
+                               'data': 'CASTE', 'className': 'textalign_left',
+                           },
+                            {
+                                'data': 'LOCALAREA', 'className': 'textalign_left',
+                            },
+                           //SEAT_CAT 
+                             {
+                                 'data': 'SEAT_CAT', 'className': 'textalign_left',
+                             },
+                             //Phase
+                              {
+                                  'data': 'Phase', 'className': 'textalign_left',
+                              },
+                    ],
+
+
+
+                });
+
+                if ((res.d) == "") {
+                    ErrorAlert("No Data Found ");
+                    return false;
+                }
+            
+        },
+        error: function (err) {
+            //ErrorLog(err);
+            alert("Something went wrong! Please Try Again Later");
+        }
+    });
+}
+function Validate() {
+    var college = $("#ddlCollege").val();
+
+    var Branch = $("#ddlBranch").val();
+    if (college == "0") {
+        alert("Please Select Cellege");
+        $("#ddlCollege").focus();
+        return false;
+    }
+    if (Branch == "0") {
+        alert("Please Select Branch");
+        $("#ddlBranch").focus();
+        return false;
+    }
+    BindProvisionalData();
+
+}

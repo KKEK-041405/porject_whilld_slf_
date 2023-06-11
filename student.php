@@ -5,24 +5,44 @@
     }
     
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- meta link -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="MBTS">
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Nicepage 5.11.4, nicepage.com">
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Page 1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+    <!-- custom link -->
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+    <link rel="stylesheet" href="Page-1.css" media="screen">
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <!-- datatable css -->
     <link rel="stylesheet" href="/static/jquery.dataTables.css">
+    <!-- bootstrap link -->
     <link rel="stylesheet" href="/static/bootstrap.min.css">
     <script src="/static/bootstrap.bundle.min.js"></script>
+    <!-- font link -->
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <title>student</title>
     <script>
         Accession_no = "";
 
     </script>
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "Site1"
+    }</script>
+    
 </head>
-<body>
+<body class="u-body u-overlap u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-palette-4-base u-sticky u-sticky-279e u-header" id="sec-ab67">
     <h6 onclick="window.location = '/details.php'"><?php echo $_SESSION["username"]; ?></h6>
     <input type="button" value="logout" id="logout" onclick="logout()">
     <br>
